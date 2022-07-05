@@ -8,7 +8,7 @@ namespace LabLogic_CodingTest.Services
         public void AddNodeToFolder(Node node, Folder folder);
         public void DeleteNodeFromFolder(string nodeName, Folder folder);
         public void MoveNodeToFolder(Node node, Folder sourceFolder, Folder destinationFolder);
-        public List<Node> Search(Folder folder, string query);
+        public List<Node> SearchFolder(Folder folder, string query);
     }
 
     public class NodeService : INodeService
@@ -36,7 +36,7 @@ namespace LabLogic_CodingTest.Services
             DeleteNodeFromFolder(node.Name, sourceFolder);
         }
 
-        public List<Node> Search(Folder folder, string query)
+        public List<Node> SearchFolder(Folder folder, string query)
         {
             List<Node> result = new List<Node>();
 

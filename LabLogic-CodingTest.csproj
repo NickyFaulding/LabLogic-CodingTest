@@ -6,6 +6,7 @@
     <RootNamespace>LabLogic_CodingTest</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <StartupObject>LabLogic_CodingTest.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
