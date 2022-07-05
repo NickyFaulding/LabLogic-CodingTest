@@ -7,16 +7,33 @@
             items = new List<Item>();
         }
 
-        public void AddItem(string name)
+        public void AddItem(Item newItem)
         {
-            items.Add(new Item(name));
-            Console.WriteLine("item {0} added to {1}", name, Name);
+            items.Add(newItem);
+            Console.WriteLine("{0} added to {1}", newItem.Name, Name);
         }
 
-        public void AddFolder(string name)
+        public void AddItem(string itemName, bool isFolder)
         {
-            items.Add(new Folder(name));
-            Console.WriteLine("folder {0} added to {1}", name, Name);
+            if (isFolder)
+            {
+                items.Add(new Folder(itemName));
+            }
+            else
+            {
+                items.Add(new Item(itemName));
+            }
+
+            Console.WriteLine("{0} added to {1}", itemName, Name);
+        }
+
+        public void DeleteItem(Item item)
+        {
+            if ((item.GetType() != typeof(RootFolder)))//should not be possible but I wanted to make clear it can't happen.
+            {
+                items.Remove(item);
+                Console.WriteLine("{0} deleted from {1}", item.Name, Name);
+            }
         }
 
         public void DeleteItem(string itemName)
@@ -33,6 +50,15 @@
             {
                 items.Remove(item);
                 Console.WriteLine("{0} deleted from {1}", itemName, Name);
+            }
+        }
+        public void MoveItem(Item itemToBeMoved, Folder destination)
+        {
+            if ((itemToBeMoved.GetType() != typeof(RootFolder)))//moving root should not be possible but I wanted to make clear it can't happen.
+            {
+                destination.items.Add(itemToBeMoved);
+                items.Remove(itemToBeMoved);
+                Console.WriteLine("{0} moved to {1}", itemToBeMoved.Name, destination.Name);
             }
         }
 

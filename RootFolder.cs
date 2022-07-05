@@ -4,7 +4,7 @@
     {
         public RootFolder(string name) : base(name)
         {
-
+            Console.WriteLine("Root folder {0} created.", name);
         }
     }
 }

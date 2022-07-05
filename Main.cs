@@ -4,24 +4,29 @@
     {
         static void Main()
         {
+            //create root folder
             RootFolder root = new RootFolder("DATA");
 
-            root.AddFolder("DB Backups");
-            root.AddFolder("Documentation");
-            root.AddFolder("GIT");
+            //create some folders
+            Folder DBBackups = new Folder("DB Backups");
+            Folder Documentation = new Folder("Documentation");
+            Folder GIT = new Folder("GIT");
 
-            Folder documentation = (Folder)root.GetItemByName("Documentation");
-            Folder git = (Folder)root.GetItemByName("GIT");
+            Folder documentation = new Folder("documentation");
 
-            documentation.AddFolder("documentation");
+            root.AddItem(DBBackups);
+            root.AddItem(Documentation);
+            root.AddItem(GIT);
 
-            git.AddFolder(".git");
-            git.AddFolder(".vs");
-            git.AddFolder("trunk");
+            Documentation.AddItem(documentation);
 
-            documentation.DeleteItem("documentation");
+            GIT.AddItem(".git", true);
+            GIT.AddItem(".vs", true);
+            GIT.AddItem("trunk", true);
 
-            root.MoveItem("Documentation", "DB Backups");
+            Documentation.DeleteItem(documentation);
+
+            root.MoveItem(Documentation, DBBackups);
         }
 
     }
