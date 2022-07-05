@@ -1,6 +1,6 @@
 ﻿namespace LabLogic_CodingTest
 {
-    internal class Item
+    internal class Item : Node
     {
         public string Name { get; set; }
 
