@@ -1,10 +1,10 @@
-﻿namespace LabLogic_CodingTest
+﻿namespace LabLogic_CodingTest.Objects
 {
-    internal class Item : Node
+    public class Node
     {
         public string Name { get; set; }
 
-        public Item(string name)
+        public Node(string name)
         {
             Name = name;
         }
