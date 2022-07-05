@@ -25,6 +25,16 @@
             }
         }
 
+        public void MoveItem(Item itemToBeMoved, Folder newLocation)
+        {
+            if (itemToBeMoved.GetType() != typeof(RootItem))
+            {
+                newLocation.items.Add(itemToBeMoved);
+
+                items.Remove(itemToBeMoved);
+            }
+        }
+
         public List<Item> Search(string query)
         {
             List<Item> searchResults = new List<Item>();
