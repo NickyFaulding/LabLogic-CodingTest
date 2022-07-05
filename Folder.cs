@@ -7,50 +7,66 @@
             items = new List<Item>();
         }
 
-        public void AddItem(Item newItem)
+        public void AddItem(string name)
         {
-            items.Add(newItem);
+            items.Add(new Item(name));
+            Console.WriteLine("item {0} added to {1}", name, Name);
         }
 
-        public void AddFolder(Folder newFolder)
+        public void AddFolder(string name)
         {
-            items.Add(newFolder);
+            items.Add(new Folder(name));
+            Console.WriteLine("folder {0} added to {1}", name, Name);
         }
 
-        public void DeleteItem(Item item)
+        public void DeleteItem(string itemName)
         {
-            if (item.GetType() != typeof(RootItem))
+            Item item = GetItemByName(itemName);
+
+            if (item == null)
+            {
+                Console.WriteLine("{0} does not exist", itemName);
+                return;
+            }
+
+            if ((item.GetType() != typeof(RootFolder)))//should not be possible but I wanted to make clear it can't happen.
             {
                 items.Remove(item);
+                Console.WriteLine("{0} deleted from {1}", itemName, Name);
             }
         }
 
-        public void MoveItem(Item itemToBeMoved, Folder newLocation)
+        public void MoveItem(string itemName, string destinationName)
         {
-            if (itemToBeMoved.GetType() != typeof(RootItem))
+            Item itemToBeMoved = GetItemByName(itemName);
+            Folder destination = (Folder)GetItemByName(destinationName);
+
+            if (itemToBeMoved == null)
             {
-                newLocation.items.Add(itemToBeMoved);
+                Console.WriteLine("{0} does not exist", itemName);
+                return;
+            }
 
+            if ((itemToBeMoved.GetType() != typeof(RootFolder)))//moving root should not be possible but I wanted to make clear it can't happen.
+            {
+                destination.items.Add(itemToBeMoved);
                 items.Remove(itemToBeMoved);
+                Console.WriteLine("{0} moved to {1}", itemName, destinationName);
             }
         }
 
-        public List<Item> Search(string query)
+        public Item GetItemByName(string name)
         {
-            List<Item> searchResults = new List<Item>();
-
             foreach (Item item in items)
             {
-                if (item.Name.Contains(query))
-                {
-                    searchResults.Add(item);
-                }
+                if (item.Name == name)
+                { return item; }
             }
-            //functionality not doing exactly what is desired... sub folders need to be searched.
-            return searchResults;
+            return null;
         }
 
-        List<Item> items;
+
+        public List<Item> items { get; set; }
     }
 
 }
