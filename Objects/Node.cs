@@ -1,6 +1,6 @@
 ﻿namespace LabLogic_CodingTest.Objects
 {
-    public class Node
+    public abstract class Node
     {
         public string Name { get; set; }
 
